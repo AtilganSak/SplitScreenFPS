@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.PlayerLoop;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,7 +14,17 @@ public class UIManager : MonoBehaviour
 
     public ScorePanel scorePanel;
 
-    public void ShowPanel(int wonPlayer)
+    int counter;
+
+    WaitForSeconds waitFor;
+
+    private void Start()
+    {
+        waitFor = new WaitForSeconds(1);
+
+        counter = 5;
+    }
+    public void ShowEndPanel(int wonPlayer)
     {
         panel.SetActive(true);
 
@@ -26,5 +38,24 @@ public class UIManager : MonoBehaviour
             player2EndPanel.SetInfo(true);
             player1EndPanel.SetInfo(false);
         }
+        StartCoroutine(TimeTick());
+    }
+    IEnumerator TimeTick()
+    {
+        player1EndPanel.timeText.text = "Returning menu in " + counter.ToString() + "sn";
+        player2EndPanel.timeText.text = "Returning menu in " + counter.ToString() + "sn";
+        while (true)
+        {
+            counter--;
+            if (counter < 0)
+            {
+                counter = 0;
+                break;
+            }
+            player1EndPanel.timeText.text = "Returning menu in " + counter.ToString() + "sn";
+            player2EndPanel.timeText.text = "Returning menu in " + counter.ToString() + "sn";
+            yield return waitFor;
+        }
+        SceneManager.LoadScene(0);
     }
 }

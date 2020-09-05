@@ -7,8 +7,11 @@ public class CountdownMenu : MonoBehaviour
 {
     public int time = 5;
 
-    public TMP_Text counterText;
-    public TMP_Text versusText;
+    public TMP_Text player1_counterText;
+    public TMP_Text player1_versusText;
+
+    public TMP_Text player2_counterText;
+    public TMP_Text player2_versusText;
 
     public AudioClip talkCountSound;
 
@@ -35,15 +38,21 @@ public class CountdownMenu : MonoBehaviour
     {
         while (true)
         {
-            counterText.text = counter.ToString();
+            player1_counterText.text = counter.ToString();
+            player2_counterText.text = counter.ToString();
 
             counter--;
 
             if (counter < 0)
             {
-                counterText.gameObject.SetActive(false);
-                versusText.text = player1Data.nickName + " vs " + player2Data.nickName;
-                versusText.gameObject.SetActive(true);
+                player1_counterText.gameObject.SetActive(false);
+                player2_counterText.gameObject.SetActive(false);
+                
+                player1_versusText.text = player1Data.nickName + " vs " + player2Data.nickName;
+                player2_versusText.text = player1Data.nickName + " vs " + player2Data.nickName;
+
+                player1_versusText.gameObject.SetActive(true);
+                player2_versusText.gameObject.SetActive(true);
 
                 break;
             }

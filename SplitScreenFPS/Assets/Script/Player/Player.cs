@@ -31,7 +31,10 @@ public class Player : MonoBehaviour
     private void Start()
     {
         if(nicknameTxt != null)
+        {
             nicknameTxt.text = playerInformations.nickName;
+            nicknameTxt.color = playerInformations.color;
+        }
         if (meshRenderer != null)
             meshRenderer.material.SetColor("_Color", playerInformations.color);
     }

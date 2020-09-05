@@ -9,11 +9,11 @@ public class OpenAndStartScenesOnEditor
 
     //START SCENES
     [MenuItem("Tools/Start Game")]
-    public static void StartGame() =>                           StartGame("Main");
+    public static void StartGame() =>                           StartGame("Levels/MainLevel");
 
     //OPEN SCENES
     [MenuItem("Tools/Open Scene/Main")]
-    public static void OpenMainScene() =>                 OpenScene("Main");
+    public static void OpenMainScene() =>                 OpenScene("Levels/MainLevel");
     [MenuItem("Tools/Open Scene/Test Scene")]
     public static void OpenTestSceneScene() =>                 OpenScene("TestScene");
 

@@ -55,15 +55,13 @@ public class GameManager : MonoBehaviour
     {
         if (player1Score == winScore)
         {
-            uiManager.ShowPanel(1);
-            Time.timeScale = 0;
+            uiManager.ShowEndPanel(1);
 
             return true;
         }
         else if(player2Score == winScore)
         {
-            uiManager.ShowPanel(2);
-            Time.timeScale = 0;
+            uiManager.ShowEndPanel(2);
 
             return true;
         }
