@@ -36,14 +36,12 @@ public class Weapon : MonoBehaviour
 
     Canvas weaponInformationCanvas;
     RaycastHit raycastHit;
-    public bool canShoot;
-    public Camera playerCamera;
+    bool canShoot;
     AudioSource audioSource;
-    Animator animator;
+    bool reloading;
 
     private void Start()
     {
-        animator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
 
         if (ammo > ammoCapacity)
@@ -51,10 +49,7 @@ public class Weapon : MonoBehaviour
         if (ammo < 0)
             ammo = 0;
 
-        playerCamera = Camera.main;
-
         weaponInformationCanvas = ammoText.GetComponentInParent<Canvas>();
-        //weaponInformationCanvas.gameObject.SetActive(false);
 
         UpdateUI();
     }
@@ -80,7 +75,7 @@ public class Weapon : MonoBehaviour
         if (readyForFire)
         {
             Debug.DrawRay(gunBarrel.position, gunBarrel.forward * shootingDistance, Color.green);
-            if (Physics.Raycast(gunBarrel.position, gunBarrel.forward, out raycastHit, shootingDistance, enemyLayers))
+            if (Physics.Raycast(gunBarrel.position, gunBarrel.forward, out raycastHit, shootingDistance))
             {
                 canShoot = true;
             }
@@ -88,22 +83,7 @@ public class Weapon : MonoBehaviour
     }
     public void Fire()
     {
-        if (ammo <= 0)
-        {
-            if (autoReload)
-            {
-                bool enoughAmmo = Reload();
-                if (!enoughAmmo)
-                    return;
-            }
-            else
-            {
-                Debug.LogError("It's over ammo, reload your weapon!");
-                return;
-            }
-        }
-
-        //animator.SetTrigger("Fire");
+        if (reloading) return;
 
         muzzleEffect.Play();
 
@@ -120,6 +100,25 @@ public class Weapon : MonoBehaviour
         SpawnImpactParticle();
 
         ApplyForce();
+
+        if (ammo <= 0)
+        {
+            if (autoReload)
+            {
+                bool enoughAmmo = ammoCount > 0;
+                if (!enoughAmmo)
+                    return;
+                else
+                {
+                    StartCoroutine(Reload());
+                }
+            }
+            else
+            {
+                Debug.LogError("It's over ammo, reload your weapon!");
+                return;
+            }
+        }
     }
     public void SetReadyForFire(bool _state)
     {
@@ -187,27 +186,27 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    bool Reload()
+    IEnumerator Reload()
     {
-        if (ammo != ammoCapacity)
+        reloading = true;
+
+        yield return new WaitForSeconds(3);
+
+        int diff = ammoCapacity - ammo;
+        if (diff <= ammoCount)
         {
-            int diff = ammoCapacity - ammo;
-            if (diff <= ammoCount)
-            {
-                ammo += diff;
-                ammoCount -= diff;
-            }
-            else
-            {
-                ammo += ammoCount;
-                ammoCount = 0;
-            }
-
-            UpdateUI();
-
-            return true;
+            ammo += diff;
+            ammoCount -= diff;
         }
-        return false;
+        else
+        {
+            ammo += ammoCount;
+            ammoCount = 0;
+        }
+
+        UpdateUI();
+
+        reloading = false;
     }
 
     void UpdateUI()

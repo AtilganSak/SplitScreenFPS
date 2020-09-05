@@ -1681,7 +1681,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cameraJoy
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 934943091}
     - target: {fileID: 709309501462655603, guid: 79af1f870327a854bbf13d855e7ecd03,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2212,6 +2212,7 @@ GameObject:
   - component: {fileID: 1623500012}
   - component: {fileID: 1623500011}
   - component: {fileID: 1623500010}
+  - component: {fileID: 1623500013}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -2295,6 +2296,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623500008}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1623500013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623500008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4a399e6b5f3fa47b7c2b9da0cea2da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialEffect: {fileID: 100002, guid: 3b1fe0d0dc796bf46b1460e5a70bd078, type: 3}
 --- !u!43 &1627308825
 Mesh:
   m_ObjectHideFlags: 0
@@ -3366,11 +3380,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 992139500, guid: e8a2f6c4f23c0b640bf8d43fae65873b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1436954033, guid: e8a2f6c4f23c0b640bf8d43fae65873b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800408526336783818, guid: e8a2f6c4f23c0b640bf8d43fae65873b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1943429921}
+    - target: {fileID: 1800408526336783818, guid: e8a2f6c4f23c0b640bf8d43fae65873b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800408526336783818, guid: e8a2f6c4f23c0b640bf8d43fae65873b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Weapon, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5593087181706200496, guid: e8a2f6c4f23c0b640bf8d43fae65873b,
         type: 3}
